@@ -72,6 +72,7 @@ const AcademicProgressDashboard = () => {
         { id: "DER01123", name: "Derecho Procesal IV", code: "DER01123", credits: 5, hours: 5, prerequisites: ["DER01118"] },
         { id: "DER01125", name: "Derecho Penal III", code: "DER01125", credits: 5, hours: 5, prerequisites: ["DER01120"] },
         { id: "DER01124", name: "Derecho Administrativo I", code: "DER01124", credits: 5, hours: 5, prerequisites: ["DER01121"] },
+        { id: "DER01126", name: "Derecho Comercial II", code: "DER01132", credits: 4, hours: 4, prerequisites: ["DER01110"] },
         { id: "DER01127", name: "Derecho Internacional Público", code: "DER01127", credits: 4, hours: 4, prerequisites: [] }
       ]
     },
@@ -84,7 +85,7 @@ const AcademicProgressDashboard = () => {
         { id: "DER01129", name: "Derecho Civil V", code: "DER01129", credits: 5, hours: 5, prerequisites: ["DER01123"] },
         { id: "DER01130", name: "Derecho Procesal Penal", code: "DER01130", credits: 5, hours: 5, prerequisites: ["DER01125"] },
         { id: "DER01131", name: "Derecho Administrativo II", code: "DER01131", credits: 4, hours: 4, prerequisites: ["DER01124"] },
-        { id: "DER01132", name: "Derecho Comercial II", code: "DER01132", credits: 4, hours: 4, prerequisites: ["DER01127"] },
+        { id: "DER01132", name: "Derecho Comercial III", code: "DER01132", credits: 4, hours: 4, prerequisites: [] },
         { id: "DER01133", name: "Derecho Tributario I", code: "DER01133", credits: 3, hours: 3, prerequisites: [] }
       ]
     },
