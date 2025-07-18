@@ -57,8 +57,10 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build --sourcemap",
-    "serve": "vite preview"
+    "build": "vite build",
+    "serve": "vite preview",
+    "preview": "vite preview",
+    "deploy": "npm run build && netlify deploy --prod --dir=dist"
   },
   "eslintConfig": {
     "extends": [
