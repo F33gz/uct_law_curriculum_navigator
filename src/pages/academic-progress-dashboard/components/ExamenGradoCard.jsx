@@ -28,7 +28,7 @@ const ExamenGradoCard = ({ isUnlocked, onToggleApproval, isApproved }) => {
       textColor: 'text-muted-foreground',
       icon: 'Lock',
       statusText: 'Bloqueado',
-      description: 'Debes completar todos los semestres (1-9) para desbloquear.'
+      description: 'Debes completar Clínica de Litigación (DER01145) para desbloquear.'
     };
   };
 
@@ -108,7 +108,7 @@ const ExamenGradoCard = ({ isUnlocked, onToggleApproval, isApproved }) => {
               <div className="flex items-center space-x-2">
                 <Icon name="AlertCircle" size={14} className="text-warning" />
                 <span className="text-xs font-caption text-warning">
-                  Completar semestres 1-9 (todas las materias)
+                  Completar Clínica de Litigación (DER01145)
                 </span>
               </div>
             </div>

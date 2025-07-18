@@ -9,140 +9,133 @@ import Icon from '../../components/AppIcon';
 const AcademicProgressDashboard = () => {
   const [approvedSubjects, setApprovedSubjects] = useState([]);
   const [isStatsExpanded, setIsStatsExpanded] = useState(false);
-  const [isExamenApproved, setIsExamenApproved] = useState(false);
   const scrollContainerRef = useRef(null);
 
-  // Mock curriculum data
+  // UCT Law Curriculum Data - Official Plan de Estudios
   const curriculumData = [
     {
       id: 1,
-      name: "Semestre 1",
-      totalCredits: 30,
+      name: "Semestre I",
+      totalCredits: 21,
       subjects: [
-        { id: "DER101", name: "Introducción al Derecho", code: "DER101", credits: 6, hours: 4, prerequisites: [] },
-        { id: "DER102", name: "Historia del Derecho", code: "DER102", credits: 4, hours: 3, prerequisites: [] },
-        { id: "DER103", name: "Filosofía del Derecho", code: "DER103", credits: 5, hours: 3, prerequisites: [] },
-        { id: "DER104", name: "Metodología de la Investigación", code: "DER104", credits: 4, hours: 3, prerequisites: [] },
-        { id: "DER105", name: "Comunicación Oral y Escrita", code: "DER105", credits: 4, hours: 3, prerequisites: [] },
-        { id: "DER106", name: "Inglés I", code: "DER106", credits: 3, hours: 2, prerequisites: [] },
-        { id: "DER107", name: "Educación Física", code: "DER107", credits: 2, hours: 2, prerequisites: [] },
-        { id: "DER108", name: "Formación Cristiana", code: "DER108", credits: 2, hours: 2, prerequisites: [] }
+        { id: "DER01102", name: "Introducción a la Abogacía", code: "DER01102", credits: 4, hours: 4, prerequisites: [] },
+        { id: "DER01103", name: "Bases del Derecho Civil", code: "DER01103", credits: 5, hours: 5, prerequisites: [] },
+        { id: "DER01105", name: "Filosofía", code: "DER01105", credits: 3, hours: 3, prerequisites: [] },
+        { id: "DER01104", name: "Teoría General del Derecho", code: "DER01104", credits: 5, hours: 5, prerequisites: [] },
+        { id: "DER01106", name: "Fuentes, Interpretación y Argumentación", code: "DER01106", credits: 4, hours: 4, prerequisites: [] }
       ]
     },
     {
       id: 2,
-      name: "Semestre 2", 
-      totalCredits: 32,
+      name: "Semestre II",
+      totalCredits: 23,
       subjects: [
-        { id: "DER201", name: "Derecho Romano", code: "DER201", credits: 6, hours: 4, prerequisites: ["DER101"] },
-        { id: "DER202", name: "Teoría del Estado", code: "DER202", credits: 5, hours: 3, prerequisites: ["DER101"] },
-        { id: "DER203", name: "Derecho Constitucional I", code: "DER203", credits: 6, hours: 4, prerequisites: ["DER101"] },
-        { id: "DER204", name: "Economía Política", code: "DER204", credits: 4, hours: 3, prerequisites: [] },
-        { id: "DER205", name: "Sociología Jurídica", code: "DER205", credits: 4, hours: 3, prerequisites: ["DER103"] },
-        { id: "DER206", name: "Inglés II", code: "DER206", credits: 3, hours: 2, prerequisites: ["DER106"] },
-        { id: "DER207", name: "Lógica Jurídica", code: "DER207", credits: 4, hours: 3, prerequisites: ["DER103"] }
+        { id: "DER01107", name: "Derecho Romano I", code: "DER01107", credits: 5, hours: 5, prerequisites: ["DER01102"] },
+        { id: "DER01108", name: "Derecho Procesal I", code: "DER01108", credits: 5, hours: 5, prerequisites: ["DER01103"] },
+        { id: "DER01111", name: "Investigación Jurídica", code: "DER01111", credits: 3, hours: 3, prerequisites: ["DER01105"] },
+        { id: "DER01110", name: "Historia del Derecho", code: "DER01110", credits: 5, hours: 5, prerequisites: ["DER01104"] },
+        { id: "DER01109", name: "Derecho Constitucional I", code: "DER01109", credits: 5, hours: 5, prerequisites: ["DER01106"] }
       ]
     },
     {
       id: 3,
-      name: "Semestre 3",
-      totalCredits: 34,
+      name: "Semestre III",
+      totalCredits: 27,
       subjects: [
-        { id: "DER301", name: "Derecho Civil I", code: "DER301", credits: 8, hours: 5, prerequisites: ["DER201"] },
-        { id: "DER302", name: "Derecho Constitucional II", code: "DER302", credits: 6, hours: 4, prerequisites: ["DER203"] },
-        { id: "DER303", name: "Derecho Penal I", code: "DER303", credits: 6, hours: 4, prerequisites: ["DER101"] },
-        { id: "DER304", name: "Derecho Administrativo I", code: "DER304", credits: 6, hours: 4, prerequisites: ["DER203"] },
-        { id: "DER305", name: "Estadística Aplicada", code: "DER305", credits: 4, hours: 3, prerequisites: ["DER204"] },
-        { id: "DER306", name: "Inglés III", code: "DER306", credits: 4, hours: 3, prerequisites: ["DER206"] }
+        { id: "DER01112", name: "Derecho Civil I", code: "DER01112", credits: 5, hours: 5, prerequisites: ["DER01107"] },
+        { id: "DER01115", name: "Derecho Procesal II", code: "DER01115", credits: 5, hours: 5, prerequisites: ["DER01108"] },
+        { id: "DER01116", name: "Derecho Penal I", code: "DER01116", credits: 5, hours: 5, prerequisites: [] },
+        { id: "DER01113", name: "Derecho Constitucional II", code: "DER01113", credits: 5, hours: 5, prerequisites: ["DER01109"] },
+        { id: "DER01114", name: "Economía y Derecho", code: "DER01114", credits: 4, hours: 4, prerequisites: [] },
+        { id: "ELECT01", name: "Electivo diversidad I", code: "ELECT01", credits: 3, hours: 3, prerequisites: [] }
       ]
     },
     {
       id: 4,
-      name: "Semestre 4",
-      totalCredits: 36,
+      name: "Semestre IV",
+      totalCredits: 25,
       subjects: [
-        { id: "DER401", name: "Derecho Civil II", code: "DER401", credits: 8, hours: 5, prerequisites: ["DER301"] },
-        { id: "DER402", name: "Derecho Penal II", code: "DER402", credits: 6, hours: 4, prerequisites: ["DER303"] },
-        { id: "DER403", name: "Derecho Administrativo II", code: "DER403", credits: 6, hours: 4, prerequisites: ["DER304"] },
-        { id: "DER404", name: "Derecho Procesal Civil I", code: "DER404", credits: 6, hours: 4, prerequisites: ["DER301"] },
-        { id: "DER405", name: "Derecho Comercial I", code: "DER405", credits: 6, hours: 4, prerequisites: ["DER301"] },
-        { id: "DER406", name: "Ética Profesional", code: "DER406", credits: 4, hours: 3, prerequisites: ["DER103"] }
+        { id: "DER01117", name: "Derecho Civil II", code: "DER01117", credits: 5, hours: 5, prerequisites: ["DER01112"] },
+        { id: "DER01118", name: "Derecho Procesal III", code: "DER01118", credits: 5, hours: 5, prerequisites: ["DER01115"] },
+        { id: "DER01120", name: "Derecho Penal II", code: "DER01120", credits: 5, hours: 5, prerequisites: ["DER01116"] },
+        { id: "DER01121", name: "Derecho Comercial I", code: "DER01121", credits: 4, hours: 4, prerequisites: ["DER01113"] },
+        { id: "DERE1150", name: "Evaluación de Ciclo Inicial", code: "DERE1150", credits: 1, hours: 2, prerequisites: [] },
+        { id: "ILC01", name: "ILC o ILTE", code: "ILC01", credits: 3, hours: 3, prerequisites: [] }
       ]
     },
     {
       id: 5,
-      name: "Semestre 5",
-      totalCredits: 38,
+      name: "Semestre V",
+      totalCredits: 24,
       subjects: [
-        { id: "DER501", name: "Derecho Civil III", code: "DER501", credits: 8, hours: 5, prerequisites: ["DER401"] },
-        { id: "DER502", name: "Derecho Penal III", code: "DER502", credits: 6, hours: 4, prerequisites: ["DER402"] },
-        { id: "DER503", name: "Derecho Procesal Civil II", code: "DER503", credits: 6, hours: 4, prerequisites: ["DER404"] },
-        { id: "DER504", name: "Derecho Comercial II", code: "DER504", credits: 6, hours: 4, prerequisites: ["DER405"] },
-        { id: "DER505", name: "Derecho Laboral I", code: "DER505", credits: 6, hours: 4, prerequisites: ["DER301"] },
-        { id: "DER506", name: "Derecho Internacional Público", code: "DER506", credits: 6, hours: 4, prerequisites: ["DER302"] }
+        { id: "DER01122", name: "Derecho Civil III", code: "DER01122", credits: 5, hours: 5, prerequisites: ["DER01117"] },
+        { id: "DER01123", name: "Derecho Procesal IV", code: "DER01123", credits: 5, hours: 5, prerequisites: ["DER01118"] },
+        { id: "DER01125", name: "Derecho Penal III", code: "DER01125", credits: 5, hours: 5, prerequisites: ["DER01120"] },
+        { id: "DER01124", name: "Derecho Administrativo I", code: "DER01124", credits: 5, hours: 5, prerequisites: ["DER01121"] },
+        { id: "DER01127", name: "Derecho Internacional Público", code: "DER01127", credits: 4, hours: 4, prerequisites: [] }
       ]
     },
     {
       id: 6,
-      name: "Semestre 6",
-      totalCredits: 36,
+      name: "Semestre VI",
+      totalCredits: 26,
       subjects: [
-        { id: "DER601", name: "Derecho Civil IV", code: "DER601", credits: 8, hours: 5, prerequisites: ["DER501"] },
-        { id: "DER602", name: "Derecho Procesal Penal I", code: "DER602", credits: 6, hours: 4, prerequisites: ["DER502"] },
-        { id: "DER603", name: "Derecho Laboral II", code: "DER603", credits: 6, hours: 4, prerequisites: ["DER505"] },
-        { id: "DER604", name: "Derecho Tributario I", code: "DER604", credits: 6, hours: 4, prerequisites: ["DER403"] },
-        { id: "DER605", name: "Derecho de Familia", code: "DER605", credits: 6, hours: 4, prerequisites: ["DER501"] },
-        { id: "DER606", name: "Medicina Legal", code: "DER606", credits: 4, hours: 3, prerequisites: ["DER502"] }
+        { id: "DER01128", name: "Derecho Civil IV", code: "DER01128", credits: 5, hours: 5, prerequisites: ["DER01122"] },
+        { id: "DER01129", name: "Derecho Civil V", code: "DER01129", credits: 5, hours: 5, prerequisites: ["DER01123"] },
+        { id: "DER01130", name: "Derecho Procesal Penal", code: "DER01130", credits: 5, hours: 5, prerequisites: ["DER01125"] },
+        { id: "DER01131", name: "Derecho Administrativo II", code: "DER01131", credits: 4, hours: 4, prerequisites: ["DER01124"] },
+        { id: "DER01132", name: "Derecho Comercial II", code: "DER01132", credits: 4, hours: 4, prerequisites: ["DER01127"] },
+        { id: "DER01133", name: "Derecho Tributario I", code: "DER01133", credits: 3, hours: 3, prerequisites: [] }
       ]
     },
     {
       id: 7,
-      name: "Semestre 7",
-      totalCredits: 34,
+      name: "Semestre VII",
+      totalCredits: 26,
       subjects: [
-        { id: "DER701", name: "Derecho Civil V", code: "DER701", credits: 8, hours: 5, prerequisites: ["DER601"] },
-        { id: "DER702", name: "Derecho Procesal Penal II", code: "DER702", credits: 6, hours: 4, prerequisites: ["DER602"] },
-        { id: "DER703", name: "Derecho Tributario II", code: "DER703", credits: 6, hours: 4, prerequisites: ["DER604"] },
-        { id: "DER704", name: "Derecho Internacional Privado", code: "DER704", credits: 6, hours: 4, prerequisites: ["DER506"] },
-        { id: "DER705", name: "Derecho Ambiental", code: "DER705", credits: 4, hours: 3, prerequisites: ["DER403"] },
-        { id: "DER706", name: "Criminología", code: "DER706", credits: 4, hours: 3, prerequisites: ["DER502"] }
+        { id: "DER01134", name: "Derecho Civil VI", code: "DER01134", credits: 5, hours: 5, prerequisites: ["DER01128"] },
+        { id: "DER01135", name: "Resolución Colaborativa de Conflictos", code: "DER01135", credits: 4, hours: 4, prerequisites: ["DER01129"] },
+        { id: "DER01136", name: "Derecho Laboral I", code: "DER01136", credits: 5, hours: 5, prerequisites: ["DER01130"] },
+        { id: "DER01138", name: "Filosofía del Derecho", code: "DER01138", credits: 3, hours: 3, prerequisites: ["DER01131"] },
+        { id: "DER01137", name: "Derecho Tributario II", code: "DER01137", credits: 3, hours: 3, prerequisites: ["DER01133"] },
+        { id: "ELECT02", name: "Electivo diversidad II", code: "ELECT02", credits: 3, hours: 3, prerequisites: [] }
       ]
     },
     {
       id: 8,
-      name: "Semestre 8",
-      totalCredits: 32,
+      name: "Semestre VIII",
+      totalCredits: 28,
       subjects: [
-        { id: "DER801", name: "Derecho Civil VI", code: "DER801", credits: 8, hours: 5, prerequisites: ["DER701"] },
-        { id: "DER802", name: "Práctica Procesal Civil", code: "DER802", credits: 6, hours: 4, prerequisites: ["DER503"] },
-        { id: "DER803", name: "Práctica Procesal Penal", code: "DER803", credits: 6, hours: 4, prerequisites: ["DER702"] },
-        { id: "DER804", name: "Derecho de la Seguridad Social", code: "DER804", credits: 4, hours: 3, prerequisites: ["DER603"] },
-        { id: "DER805", name: "Derecho Minero", code: "DER805", credits: 4, hours: 3, prerequisites: ["DER403"] },
-        { id: "DER806", name: "Taller de Tesis I", code: "DER806", credits: 4, hours: 3, prerequisites: ["DER104"] }
+        { id: "DER01139", name: "Derecho Civil VII", code: "DER01139", credits: 5, hours: 5, prerequisites: ["DER01134"] },
+        { id: "DER01140", name: "Derechos Procesal de Familia", code: "DER01140", credits: 4, hours: 4, prerequisites: ["DER01135"] },
+        { id: "DER01144", name: "Negociación, Mediación y Arbitraje", code: "DER01144", credits: 4, hours: 4, prerequisites: [] },
+        { id: "DER01142", name: "Derecho Laboral II", code: "DER01142", credits: 5, hours: 5, prerequisites: ["DER01136"] },
+        { id: "DER01141", name: "Seminario de Investigación", code: "DER01141", credits: 3, hours: 3, prerequisites: ["DER01138"] },
+        { id: "DERE1151", name: "Evaluación de Ciclo Intermedio", code: "DERE1151", credits: 1, hours: 2, prerequisites: [] },
+        { id: "ELECT03", name: "Electivo diversidad III", code: "ELECT03", credits: 3, hours: 3, prerequisites: [] }
       ]
     },
     {
       id: 9,
-      name: "Semestre 9",
-      totalCredits: 30,
+      name: "Semestre IX",
+      totalCredits: 28,
       subjects: [
-        { id: "DER901", name: "Práctica Profesional", code: "DER901", credits: 12, hours: 8, prerequisites: ["DER801", "DER802", "DER803"] },
-        { id: "DER902", name: "Taller de Tesis II", code: "DER902", credits: 6, hours: 4, prerequisites: ["DER806"] },
-        { id: "DER903", name: "Derecho Procesal Constitucional", code: "DER903", credits: 4, hours: 3, prerequisites: ["DER302"] },
-        { id: "DER904", name: "Electivo de Especialización I", code: "DER904", credits: 4, hours: 3, prerequisites: [] },
-        { id: "DER905", name: "Electivo de Especialización II", code: "DER905", credits: 4, hours: 3, prerequisites: [] }
+        { id: "DER01145", name: "Clínica de Litigación", code: "DER01145", credits: 12, hours: 16, prerequisites: ["DER01139", "DER01140"] },
+        { id: "DER01146", name: "Clínica Institucional", code: "DER01146", credits: 5, hours: 7, prerequisites: ["DER01144"] },
+        { id: "DER01147", name: "Derecho de los Pueblos Indígenas", code: "DER01147", credits: 4, hours: 4, prerequisites: ["DER01142"] },
+        { id: "DER01148", name: "Derecho Ambiental", code: "DER01148", credits: 4, hours: 4, prerequisites: ["DER01141"] },
+        { id: "FTD1410", name: "Ética Profesional", code: "FTD1410", credits: 3, hours: 3, prerequisites: [] }
       ]
     },
     {
       id: 10,
-      name: "Semestre 10",
-      totalCredits: 28,
+      name: "Semestre X",
+      totalCredits: 30,
       subjects: [
-        { id: "DER1001", name: "Seminario de Grado", code: "DER1001", credits: 8, hours: 5, prerequisites: ["DER902"] },
-        { id: "DER1002", name: "Clínica Jurídica", code: "DER1002", credits: 8, hours: 5, prerequisites: ["DER901"] },
-        { id: "DER1003", name: "Derecho Procesal Laboral", code: "DER1003", credits: 4, hours: 3, prerequisites: ["DER603"] },
-        { id: "DER1004", name: "Electivo de Especialización III", code: "DER1004", credits: 4, hours: 3, prerequisites: [] },
-        { id: "DER1005", name: "Electivo de Especialización IV", code: "DER1005", credits: 4, hours: 3, prerequisites: [] }
+        { id: "DER01149", name: "Examen de Grado", code: "DER01149", credits: 12, hours: 24, prerequisites: ["DER01145"] },
+        { id: "DER02901", name: "Electivo I", code: "DER02901", credits: 6, hours: 8, prerequisites: [] },
+        { id: "DER02902", name: "Electivo II", code: "DER02902", credits: 6, hours: 8, prerequisites: [] },
+        { id: "DER02903", name: "Electivo III", code: "DER02903", credits: 6, hours: 8, prerequisites: [] }
       ]
     }
   ];
@@ -150,14 +143,9 @@ const AcademicProgressDashboard = () => {
   // Load approved subjects from localStorage on component mount
   useEffect(() => {
     const savedApproved = localStorage.getItem('approvedSubjects');
-    const savedExamen = localStorage.getItem('examenApproved');
     
     if (savedApproved) {
       setApprovedSubjects(JSON.parse(savedApproved));
-    }
-    
-    if (savedExamen) {
-      setIsExamenApproved(JSON.parse(savedExamen));
     }
   }, []);
 
@@ -165,10 +153,6 @@ const AcademicProgressDashboard = () => {
   useEffect(() => {
     localStorage.setItem('approvedSubjects', JSON.stringify(approvedSubjects));
   }, [approvedSubjects]);
-
-  useEffect(() => {
-    localStorage.setItem('examenApproved', JSON.stringify(isExamenApproved));
-  }, [isExamenApproved]);
 
   // Check if a subject is unlocked based on prerequisites
   const isSubjectUnlocked = useCallback((subject) => {
@@ -181,15 +165,14 @@ const AcademicProgressDashboard = () => {
     );
   }, [approvedSubjects]);
 
-  // Check if Examen de Grado is unlocked (all semesters 1-9 completed)
+  // Check if Examen de Grado is unlocked (prerequisite: Clínica de Litigación completed)
   const isExamenUnlocked = useCallback(() => {
-    const allRequiredSubjects = curriculumData
-      .slice(0, 9) // Semesters 1-9
-      .flatMap(semester => semester.subjects.map(subject => subject.id));
-    
-    return allRequiredSubjects.every(subjectId => 
-      approvedSubjects.includes(subjectId)
-    );
+    return approvedSubjects.includes("DER01145"); // Clínica de Litigación
+  }, [approvedSubjects]);
+
+  // Check if Examen de Grado is approved
+  const isExamenApproved = useCallback(() => {
+    return approvedSubjects.includes("DER01149"); // Examen de Grado
   }, [approvedSubjects]);
 
   // Toggle subject approval status
@@ -206,7 +189,7 @@ const AcademicProgressDashboard = () => {
   // Toggle Examen de Grado approval
   const toggleExamenApproval = () => {
     if (isExamenUnlocked()) {
-      setIsExamenApproved(prev => !prev);
+      toggleSubjectApproval("DER01149"); // Examen de Grado subject ID
     }
   };
 
@@ -256,9 +239,7 @@ const AcademicProgressDashboard = () => {
   const handleReset = () => {
     if (window.confirm('¿Estás seguro de que quieres reiniciar todo tu progreso? Esta acción no se puede deshacer.')) {
       setApprovedSubjects([]);
-      setIsExamenApproved(false);
       localStorage.removeItem('approvedSubjects');
-      localStorage.removeItem('examenApproved');
     }
   };
 
@@ -271,7 +252,7 @@ const AcademicProgressDashboard = () => {
       career: "Derecho",
       progress: stats,
       approvedSubjects: approvedSubjects,
-      examenCompleted: isExamenApproved,
+      examenCompleted: isExamenApproved(),
       semesterDetails: curriculumData.map(semester => ({
         name: semester.name,
         completion: Math.round((semester.subjects.filter(subject => 
@@ -373,7 +354,7 @@ const AcademicProgressDashboard = () => {
         <div className="max-w-7xl mx-auto">
           <ExamenGradoCard
             isUnlocked={isExamenUnlocked()}
-            isApproved={isExamenApproved}
+            isApproved={isExamenApproved()}
             onToggleApproval={toggleExamenApproval}
           />
         </div>

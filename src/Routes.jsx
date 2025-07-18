@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes as RouterRoutes, Route } from "react-router-dom";
-import ScrollToTop from "components/ScrollToTop";
-import ErrorBoundary from "components/ErrorBoundary";
+import ScrollToTop from "./components/ScrollToTop";
+import ErrorBoundary from "./components/ErrorBoundary";
 // Add your imports here
-import AcademicProgressDashboard from "pages/academic-progress-dashboard";
-import NotFound from "pages/NotFound";
+import AcademicProgressDashboard from "./pages/academic-progress-dashboard";
+import NotFound from "./pages/NotFound";
 
 const Routes = () => {
   return (
