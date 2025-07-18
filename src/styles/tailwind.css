@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme Colors */
+    --color-background: #F8F9FA;
+    --color-foreground: #212529;
+    --color-border: rgba(44, 62, 80, 0.1);
+    --color-input: #FFFFFF;
+    --color-ring: #3498DB;
+    
+    --color-card: #FFFFFF;
+    --color-card-foreground: #212529;
+    --color-popover: #FFFFFF;
+    --color-popover-foreground: #212529;
+    
+    --color-muted: #F8F9FA;
+    --color-muted-foreground: #6C757D;
+    
+    --color-primary: #2C3E50;
+    --color-primary-foreground: #FFFFFF;
+    --color-secondary: #5D6D7E;
+    --color-secondary-foreground: #FFFFFF;
+    
+    --color-accent: #3498DB;
+    --color-accent-foreground: #FFFFFF;
+    
+    --color-success: #28A745;
+    --color-success-foreground: #FFFFFF;
+    --color-warning: #FFC107;
+    --color-warning-foreground: #000000;
+    --color-error: #DC3545;
+    --color-error-foreground: #FFFFFF;
+    --color-destructive: #DC3545;
+    --color-destructive-foreground: #FFFFFF;
+  }
+
+  [data-theme="dark"] {
+    /* Dark Theme Colors */
+    --color-background: #0F1419;
+    --color-foreground: #E2E8F0;
+    --color-border: rgba(226, 232, 240, 0.1);
+    --color-input: #1A202C;
+    --color-ring: #3498DB;
+    
+    --color-card: #1A202C;
+    --color-card-foreground: #E2E8F0;
+    --color-popover: #1A202C;
+    --color-popover-foreground: #E2E8F0;
+    
+    --color-muted: #2D3748;
+    --color-muted-foreground: #A0AEC0;
+    
+    --color-primary: #4A5568;
+    --color-primary-foreground: #FFFFFF;
+    --color-secondary: #718096;
+    --color-secondary-foreground: #FFFFFF;
+    
+    --color-accent: #3498DB;
+    --color-accent-foreground: #FFFFFF;
+    
+    --color-success: #38A169;
+    --color-success-foreground: #FFFFFF;
+    --color-warning: #D69E2E;
+    --color-warning-foreground: #000000;
+    --color-error: #E53E3E;
+    --color-error-foreground: #FFFFFF;
+    --color-destructive: #E53E3E;
+    --color-destructive-foreground: #FFFFFF;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism Effects */
+  .glass-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  [data-theme="dark"] .glass-card {
+    background: rgba(26, 32, 44, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.1);
+  }
+  
+  /* Smooth Scrolling */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Hide scrollbar but allow scrolling */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Semester Container Scroll */
+  .semester-scroll {
+    scroll-snap-type: x mandatory;
+    scroll-padding: 1rem;
+  }
+  
+  .semester-scroll-item {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  
+  /* Cascade Animation Utilities */
+  .cascade-enter {
+    animation: cascadeEnter 0.3s ease-out forwards;
+  }
+  
+  @keyframes cascadeEnter {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Progress Ring Animation */
+  .progress-ring {
+    transform-origin: center;
+    animation: progressRing 0.6s ease-out forwards;
+  }
+  
+  @keyframes progressRing {
+    from {
+      transform: rotate(-90deg) scale(0.8);
+    }
+    to {
+      transform: rotate(-90deg) scale(1);
+    }
+  }
+  
+  /* Micro-interaction Hover Effects */
+  .hover-lift {
+    transition: transform 0.2s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Custom Shadows */
+  .shadow-card {
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  }
+  
+  [data-theme="dark"] .shadow-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .shadow-modal {
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.12);
+  }
+  
+  [data-theme="dark"] .shadow-modal {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Smooth Transitions */
+  .transition-smooth {
+    transition: all 0.3s ease-out;
+  }
+  
+  .transition-cascade {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Theme transition for all elements */
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Horizontal Scroll Enhancements */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Line clamp utility for compact text */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Smooth scrolling for semester columns */
+  .semester-column-scroll {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced hover effects for semester columns */
+  .semester-column-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Mobile scroll snap */
+  @media (max-width: 768px) {
+    .semester-scroll-container {
+      scroll-snap-type: x mandatory;
+    }
+    
+    .semester-scroll-item {
+      scroll-snap-align: start;
+    }
+  }
+}
